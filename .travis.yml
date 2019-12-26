@@ -3,22 +3,22 @@ services:
     - docker
 
 before_install:
-    - docker build -t arnizzle/complex-fib -f ./client/Dockerfile.dev ./client
+    - docker build -t arnizzle/react-test -f ./client/Dockerfile.dev ./client
     
 script:
     #- docker run -e CI=true arnizzle/complex-fib npm run test
     - docker run -e CI=true arnizzle/complex-fib npm test -- --coverage
 
 after_success:
-    - docker build -t arnizzle/multi-client ./client
-    - docker build -t arnizzle/multi-server ./server
-    - docker build -t arnizzle/multi-nginx ./nginx
-    - docker build -t arnizzle/multi-worker ./worker
+    - docker build -t jilsx/multi-client ./client
+    - docker build -t jilsx/multi-server ./server
+    - docker build -t jilsx/multi-nginx ./nginx
+    - docker build -t jilsx/multi-worker ./worker
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push arnizzle/multi-client
-    - docker push arnizzle/multi-server
-    - docker push arnizzle/multi-worker
-    - docker push arnizzle/multi-nginx
+    - docker push jilsx/multi-client
+    - docker push jilsx/multi-server
+    - docker push jilsx/multi-worker
+    - docker push jilsx/multi-nginx
 
 deploy:
     provider: elasticbeanstalk
