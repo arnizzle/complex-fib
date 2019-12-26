@@ -14,6 +14,11 @@ after_success:
     - docker build -t arnizzle/multi-server ./server
     - docker build -t arnizzle/multi-nginx ./nginx
     - docker build -t arnizzle/multi-worker ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push arnizzle/multi-client
+    - docker push arnizzle/multi-server
+    - docker push arnizzle/multi-worker
+    - docker push arnizzle/multi-nginx
 
 deploy:
     provider: elasticbeanstalk
