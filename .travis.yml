@@ -21,14 +21,14 @@ after_success:
     - docker push jilsx/multi-nginx
 
 deploy:
+    edge: true
     provider: elasticbeanstalk
     region: "eu-west-2"
     app: "complex-fib"
-    env: "ReactWorkflow-env"
-    bucket_name: ""
-    bucket_path: "complex-fib"
+    env: "ComplexFib-env"
+    bucket_name: elasticbeanstalk-eu-west-2-844569641877
+    bucket_path: "docker-multi"
     on:
         branch: master
-    access_key_id: "$AWS_ACCESS_KEY"
-    secret_access_key: 
-        secure: "$AWS_SECRET_KEY"
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
