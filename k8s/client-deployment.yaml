@@ -5,16 +5,13 @@ metadata:
 spec:
   replicas: 3
   selector:
-    matchLabels: 
+    matchLabels:
       component: web
   template:
     metadata:
-      label:
+      labels:
         component: web
     spec:
       containers:
         - name: client
           image: jilsx/multi-client
-          ports:
-            - containerPort: 3000
-            
